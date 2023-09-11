@@ -1,0 +1,2 @@
+class WebQuiz < ApplicationRecord
+end

@@ -27,21 +27,21 @@ export const StartPage: FC = () => {
   
 
   useEffect(() => {
-    let timer: NodeJS.Timeout | number; // timerに型を追加
-  
-    if (isCounting && count > 0) {
-      timer = setTimeout(() => {
-        setCount((prevCount) => prevCount - 1);
-      }, 1000);
-    } else if (count === 0) {
-      setIsCounting(false);
-    }
-  
-    return () => {
-      clearTimeout(timer as NodeJS.Timeout); // timerをNodeJS.Timeoutとして型アサーション
-    };
-  }, [isCounting, count]);
-  
+  let timer: NodeJS.Timeout | number; // timerに型を追加
+
+  if (isCounting && count > 0) {
+    timer = setTimeout(() => {
+      setCount((prevCount) => prevCount - 1);
+    }, 1000);
+  } else if (count === 0) {
+    setIsCounting(false);
+  }
+
+  return () => {
+    clearTimeout(timer as NodeJS.Timeout); // timerをNodeJS.Timeoutとして型アサーション
+  };
+}, [isCounting, count]);
+
   
 
   return (
@@ -51,7 +51,7 @@ export const StartPage: FC = () => {
           <div className="h-full" style={{backgroundImage: `url(${background})`, width: "1187px", height:"788px"}}>
             <div className="py-24 px-16">
               <p className="text text-sky-400 text-9xl fond-bold text-center mb-8">
-                {title}
+              {isCounting ? count : title}
               </p>
               <div className="text-center">
                 <Link to='/finish'>フィニッシュページへ</Link>

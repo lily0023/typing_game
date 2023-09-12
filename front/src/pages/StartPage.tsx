@@ -11,7 +11,7 @@ export const StartPage: FC = () => {
   const [isCounting, setIsCounting] = React.useState(false);
 
   useEffect(() => {
-    const handleSpacePress = (e) => {
+    const handleSpacePress = (e: KeyboardEvent) => {
       if (e.keyCode === 32 && count > 0 && !isCounting) {  // !isCountingを追加して、カウント中に再度スタートしないようにします
         setIsCounting(true);
       }
@@ -23,8 +23,26 @@ export const StartPage: FC = () => {
     return () => {
       window.removeEventListener('keydown', handleSpacePress);
     };
-  }, [count, isCounting]);  // isCountingを依存配列に追加
+  }, [count, isCounting]);  
+  
 
+  useEffect(() => {
+    let timer: NodeJS.Timeout | number; // timerに型を追加
+  
+    if (isCounting && count > 0) {
+      timer = setTimeout(() => {
+        setCount((prevCount) => prevCount - 1);
+      }, 1000);
+    } else if (count === 0) {
+      setIsCounting(false);
+    }
+  
+    return () => {
+      clearTimeout(timer as NodeJS.Timeout); // timerをNodeJS.Timeoutとして型アサーション
+    };
+  }, [isCounting, count]);
+  
+  
 
   return (
     <>

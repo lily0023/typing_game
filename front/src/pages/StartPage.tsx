@@ -10,6 +10,22 @@ export const StartPage: FC = () => {
   const [count, setCount] = React.useState(5);
   const [isCounting, setIsCounting] = React.useState(false);
 
+  useEffect(() => {
+    const handleSpacePress = (e) => {
+      if (e.keyCode === 32 && count > 0 && !isCounting) {  // !isCountingを追加して、カウント中に再度スタートしないようにします
+        setIsCounting(true);
+      }
+    };
+    //スペースキーのキーコードは32
+
+    window.addEventListener('keydown', handleSpacePress);
+
+    return () => {
+      window.removeEventListener('keydown', handleSpacePress);
+    };
+  }, [count, isCounting]);  // isCountingを依存配列に追加
+
+
   return (
     <>
       <div className="h-full" style={{backgroundImage:`url(${baseBackground})`, height:"1080px"}}>

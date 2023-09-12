@@ -1,7 +1,6 @@
-import React from "react";
+import React, { FC, useState, useEffect } from "react";  // useEffectを追加
 import baseBackground from "../img/pop.png";
 import background from "../img/window.png";
-import { FC } from "react";
 import { Link } from "react-router-dom";
 
 

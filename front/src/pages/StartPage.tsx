@@ -6,6 +6,10 @@ import { Link } from "react-router-dom";
 
 export const StartPage: FC = () => {
   const title = "START!!"
+
+  const [count, setCount] = React.useState(5);
+  const [isCounting, setIsCounting] = React.useState(false);
+
   return (
     <>
       <div className="h-full" style={{backgroundImage:`url(${baseBackground})`, height:"1080px"}}>
